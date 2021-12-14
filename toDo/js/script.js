@@ -4,8 +4,7 @@ const headerInput = document.querySelector('.header-input');
 const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 
-const toDoData = [
-]
+let toDoData = JSON.parse(localStorage.getItem('List'));
 
 const render = function() {
   todoList.innerHTML = '';
@@ -29,15 +28,20 @@ const render = function() {
     li.querySelector('.todo-complete').addEventListener('click', function() {
       item.completed = !item.completed;
       render();
+      toStorage();
     });
 
     li.querySelector('.todo-remove').addEventListener('click', function() {
       toDoData.splice(item, 1);
       render();
+      toStorage();
     });
-    
-    
   });
+  
+};
+
+const toStorage = function() {
+  localStorage.setItem('List', JSON.stringify(toDoData));
 };
 
 
@@ -45,7 +49,7 @@ const render = function() {
 todoControl.addEventListener('submit', function(event){
   event.preventDefault();
 
-  if (headerInput.value !== '' || headerInput.value !== null ) {
+  if (headerInput.value !== '' ) {
     const newToDo = {
     text: headerInput.value,
     completed: false,
@@ -58,5 +62,6 @@ todoControl.addEventListener('submit', function(event){
   } else {
     alert('введите название задачи')
   };
-
+  toStorage();
 });
+
