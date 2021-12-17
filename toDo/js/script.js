@@ -4,7 +4,18 @@ const headerInput = document.querySelector('.header-input');
 const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 
-let toDoData = JSON.parse(localStorage.getItem('List'));
+// let toDoData = [];
+
+let check = JSON.parse(localStorage.getItem('List'));
+
+if (check === '' || check === null) {
+  toDoData = [];
+} else {
+  toDoData = JSON.parse(localStorage.getItem('List'));
+};
+// let toDoData = JSON.parse(localStorage.getItem('List'));
+
+
 
 const render = function() {
   todoList.innerHTML = '';
@@ -56,12 +67,12 @@ todoControl.addEventListener('submit', function(event){
   };
 
   toDoData.push(newToDo);
+  toStorage();
   headerInput.value = '';
 
   render();
   } else {
     alert('введите название задачи')
   };
-  toStorage();
 });
 
