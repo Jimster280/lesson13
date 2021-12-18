@@ -51,6 +51,7 @@ const render = function() {
   
 };
 
+
 const toStorage = function() {
   localStorage.setItem('List', JSON.stringify(toDoData));
 };
@@ -76,3 +77,4 @@ todoControl.addEventListener('submit', function(event){
   };
 });
 
+render();
